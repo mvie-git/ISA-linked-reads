@@ -15,8 +15,8 @@ The Tell-Seq pipeline (`Tell-Read` module) takes as input the initial raw sequen
 - **error barcoded reads correction**: the unique barcodes associated with only one read are most likely caused by sequencing errors in the barcode. These barcodes are first identified if they are 1-base mismatches with one of the barcode associated with multiple reads, and then error-corrected. Barcodes with errors after this step are filtered out. The erroneous barcodes along with their associated reads are removed and excluded from the rest of analyses. The remainin R1 and R2 reads, along with their associated I1 reads (barcodes) are the TELL-seq linked reads. They are the input for downstream analysis
 
 To run Tell-Read module:
-Variables:
 ```
+# Variables
 sample=149 # Name of the sample used
 output_dir=demultiplex_vector # Name the folder where the result will be stored
 genome_dir=${workdir}/genomes/vector # Path to the genome reference folder
