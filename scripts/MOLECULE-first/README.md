@@ -83,6 +83,9 @@ $workdir/tellread-release/run_tellread_fq.sh \
 ## BWA: Map TELL-seq linked reads against the hybrid genome
 > BWA is a software package for mapping low-divergent sequences against a large reference genome. BWA-MEM is better for longer sequences ranged from 70bp to 1Mbp.
 
+![Alt text](/media/mallaury/MALLAURY1/phd/projects/ISA_linked_reads/images/workflow/molecule_first/1_mapping_hybrid_genome.pdf "Optional title")
+
+
 **BWA-mem** takes as input the demultiplexed and error barcoded corrected TELL-seq linked reads (FASTQ) for mapping those reads against the hybrid genome. The two FASTA reference genome files are required to create an index of both references together with `BWA index` tool.
 ```
 # Concatenate the two FASTA reference genome files
