@@ -1,0 +1,39 @@
+__________
+
+RIAN LOCUS
+__________
+
+Sample: 152
+
+Goal: Subset BAM file (from mapping against rAAV sequence) to keep only reads associated with the barcodes from reads mapping into the Rian locus
+
+	* Extract the list of barcodes associated with reads mapped into the Rian locus (mouse genome)
+		- samtools view output_all_mapping.rian_locus.bam | grep -o "BX:Z:[ACTG]*" | sort > output_all_mapping.rian_locus.barcodes.txt
+
+Subset BAM file to keep only reads with a common barcode with reads mapped in the Rian locus
+	* samtools view /home/mallaury/Bureau/phd/project/GSDIa_louisa/ISA/1.mapping_cleaning/output/vector/152/152_mapping.mapped.bam | grep -w -f output_all_mapping.rian_locus.barcodes.txt > output_body_mapping.sam
+	* samtools view -H /home/mallaury/Bureau/phd/project/GSDIa_louisa/ISA/1.mapping_cleaning/output/vector/152/152_mapping.mapped.bam > output_header_mapping.sam
+	* cat output_header_mapping.sam output_body_mapping.sam > output_all_mapping.sam
+	* samtools view -@ 10 -b output_all_mapping.sam > output_all_mapping.bam
+	* samtools sort -@ 10 output_all_mapping.bam -o output_all_mapping.rian_locus.AAV.bam
+	* samtools index output_all_mapping.rian_locus.AAV.bam
+	* rm output_all_mapping.bam
+	* rm output_body_mapping.sam
+	* rm output_header_mapping.sam 
+	* rm output_all_mapping.sam
+	
+Convert BAM file into FASTQ format
+	* To create two FASTQ files for paired-end sequences, it is required that the BAM file is sorted/grouped by the read name
+		samtools sort -n -o output_all_mapping.rian_locus.AAV.sorted.bam output_all_mapping.rian_locus.AAV.bam
+	* bedtools bamtofastq -i output_all_mapping.rian_locus.AAV.sorted.bam \
+                      -fq output_all_mapping.rian_locus.AAV.R1.fastq \
+                      -fq2 output_all_mapping.rian_locus.AAV.R2.fastq
+	* Number of reads: 12716 (R1 + R2)
+	
+Combine two BAM/FASTQ files
+	* cat command
+	
+
+
+
+

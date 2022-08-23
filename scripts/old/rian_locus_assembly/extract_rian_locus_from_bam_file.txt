@@ -1,0 +1,48 @@
+__________
+
+RIAN LOCUS
+__________
+
+
+Subset BAM file to keep only reads present in the Rian locus
+	* samtools view align_mouse.sorted.bam "chr12:109603975-109661716" > output_body_mapping.sam
+	* samtools view -H align_mouse.sorted.bam > output_header_mapping.sam
+	* cat output_header_mapping.sam output_body_mapping.sam > output_all_mapping.sam
+	* samtools view -@ 10 -b output_all_mapping.sam > output_all_mapping.bam
+	* samtools sort -@ 10 output_all_mapping.bam -o output_all_mapping.rian_locus.bam
+	* samtools index output_all_mapping.rian_locus.bam
+	* rm output_all_mapping.bam
+	* rm output_body_mapping.sam
+	* rm output_header_mapping.sam 
+	* rm output_all_mapping.sam
+
+
+Index file? Subset to keep only reads/barcodes present in the Rian locus region
+	* Extract reads from output_all_mapping.rian_locus.bam file (only reads mapped to Rian locus region)
+		samtools view output_all_mapping.rian_locus.bam | awk '{print $1}' > 152_all_mapping.rian_locus.read_names.txt
+	* Copy this file to the workstation
+	* Subset index file to keep only read names of interest (and barcodes associated)
+		zcat GC107152.210106_WLG_GR002.210219.NovaSeq1.FCB.lane12.gcap_dev.I1.fastq.gz | grep -A3 -w -f 152_all_mapping.rian_locus.read_names.txt > 152_all_mapping.rian_locus.index.fastq
+	* Remove lines with "--" between each match
+		sed -i '/--/d' 152_all_mapping.rian_locus.index.fastq
+	* Compress index file
+		pigz 152_all_mapping.rian_locus.index.fastq
+	* Copy the file back on my own computer
+
+
+Convert BAM file into FASTQ format
+	* To create two FASTQ files for paired-end sequences, it is required that the BAM file is sorted/grouped by the read name
+		samtools sort -n -o output_all_mapping.rian_locus.sorted.bam output_all_mapping.rian_locus.bam
+	* bedtools bamtofastq -i output_all_mapping.rian_locus.sorted.bam \
+                      -fq R1.fq \
+                      -fq2 R2.fq
+	* Number of reads: 31754 (R1+R2)
+
+
+Update the index file with new read names
+	* Subset the index file to keep only read names of interest
+		cat R1.fq | grep "@A00305" | sed 's/\/1//' > 152_index_subset_read_names.txt
+		zcat 152_all_mapping.rian_locus.index.fastq.gz | grep -A3 -w -f 152_index_subset_read_names.txt > 152_all_mapping.rian_locus.index.update.fastq
+		pigz 152_all_mapping.rian_locus.index.update.fastq
+
+

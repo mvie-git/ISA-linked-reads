@@ -1,0 +1,37 @@
+______________
+
+LOCAL ASSEMBLY
+______________
+
+Sample 152
+
+Number of reads: 31962 (16075 unique reads)
+Length: 57kb
+
+	* Run tellink on those FASTQ files
+		CMD: ./run_tellink.sh -r1 /home/mallaury/Bureau/phd/project/GSDIa_louisa/ISA/rian_locus_assembly/input/extract_rian_locus_from_bam_file/152/R1.fq.gz -r2 /home/mallaury/Bureau/phd/project/GSDIa_louisa/ISA/rian_locus_assembly/input/extract_rian_locus_from_bam_file/152/R2.fq.gz -i1 /home/mallaury/Bureau/phd/project/GSDIa_louisa/ISA/rian_locus_assembly/input/extract_rian_locus_from_bam_file/152/152_all_mapping.rian_locus.index.fastq.gz -r /home/mallaury/Bureau/phd/project/GSDIa_louisa/ISA/rian_locus_assembly/genomes/mouse/mm10_correct_chr_name.fa -o /home/mallaury/Bureau/phd/project/GSDIa_louisa/ISA/rian_locus_assembly/output/ -k 45 -lc 31 -p rian_locus -j 10
+
+
+ERROR! See quast report
+Logging to /home/mallaury/Bureau/phd/project/GSDIa_louisa/ISA/rian_locus_assembly/output/rian_locus/rian_locus-eval/quast.log
+NOTICE: Maximum number of threads is set to 3 (use --threads option to set it manually)
+
+CWD: /home/mallaury/Bureau/phd/project/GSDIa_louisa/ISA/rian_locus_assembly/output
+Main parameters: 
+  MODE: default, threads: 3, minimum contig length: 500, minimum alignment length: 65, \
+  ambiguity: one, threshold for extensive misassembly size: 2500
+
+WARNING: Can't draw plots: python-matplotlib is missing or corrupted.
+
+Error in rule quast:
+    jobid: 2
+    output: ./rian_locus/rian_locus-eval/report.tsv
+    shell:
+        python /tellysis/tellink/quast-5.0.0/quast.py -m 500 -x 2500 --scaffold-gap-max-size 20000 -o ./rian_locus/rian_locus-eval -r /home/mallaury/Bureau/phd/new/test/tellink-release/genomes/mouse/mm10_correct_chr_name.fa ./rian_locus/scaffold.full.fasta
+        (exited with non-zero exit code)
+
+Shutting down, this might take some time.
+Exiting because a job execution failed. Look above for error message
+Complete log: /home/mallaury/Bureau/phd/new/test/tellink-release/output/.snakemake/log/2022-01-05T042713.438725.snakemake.log
+
+

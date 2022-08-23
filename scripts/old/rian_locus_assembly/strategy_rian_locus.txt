@@ -1,0 +1,13 @@
+# See inside the zip archive
+unzip -l 2208_210106_WLG_GR002_GC107149-54_210219.NovaSeq1.FCB.zip
+
+# Extract only a specific file from a zipped archive to a given directory
+unzip -j "2208_210106_WLG_GR002_GC107149-54_210219.NovaSeq1.FCB.zip" "GC107152.210106_WLG_GR002.210219.NovaSeq1.FCB.lane1.gcap_dev.I1.fastq.gz" -d "/data/kevin/"
+
+# Copy barcode files to extract to the workstation
+
+
+zgrep -w -f common_barcodes_clean.txt -A2 -B1 GC107152.210106_WLG_GR002.210219.NovaSeq1.FCB.lane12.gcap_dev.I1.fastq.gz > test_I1.txt
+
+zgrep "^@" test_I1.txt.gz > test_read_names.txt
+
