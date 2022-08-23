@@ -7,9 +7,16 @@ There is three steps:
 3. Identify chimeric molecules meaning with reads mapped to both genomes
 
 
-## Generate TELL-Seq linked-reads from sequencing data
+# Table of Contents
+1. [Generate TELL-Seq linked-reads from sequencing data](#TELL-Seq linked-reads)
+2. [Example2](#example2)
+3. [Third Example](#third-example)
+4. [Fourth Example](#fourth-examplehttpwwwfourthexamplecom)
 
-> The Tell-Read module of the TELL-Seq software demultiplex and correct error barcoded reads from the initial raw sequencing data.
+
+## Generate TELL-Seq linked-reads from sequencing data <a name="TELL-Seq linked-reads"></a>
+
+> The Tell-Read module of the [TELL-Seq software](https://www.universalsequencing.com/) demultiplex and correct error barcoded reads from the initial raw sequencing data.
 
 The Tell-Seq pipeline (`Tell-Read` module) takes as input the initial raw sequencing FASTQ data: 
 - **demultiplexing**: they are further demultiplexed into sample separated I1 (index 1) reads, R1 reads, R2 reads, based on I2 (index 2) reads. I1 reads are the TELL_seq barcode sequences. For each sequencing library construction, a set of unique barcode sequences was randomly chosen from a 2.4 billion-barcode pool. These sample-demultiplexed FASTQ files are saved as the raw data output files. 
@@ -17,6 +24,13 @@ The Tell-Seq pipeline (`Tell-Read` module) takes as input the initial raw sequen
 - **error barcoded reads correction**: the unique barcodes associated with only one read are most likely caused by sequencing errors in the barcode. These barcodes are first identified if they are 1-base mismatches with one of the barcode associated with multiple reads, and then error-corrected. Barcodes with errors after this step are filtered out. The erroneous barcodes along with their associated reads are removed and excluded from the rest of analyses. The remainin R1 and R2 reads, along with their associated I1 reads (barcodes) are the TELL_seq linked reads. They are the input for downstream analysis
 
 To run Tell-Read module:
+Variables:
+```
+sample=149 # Name of the sample used
+output_dir=demultiplex_vector # Name the folder where the result will be stored
+genome_dir=${workdir}/genomes/vector # Path to the genome reference folder
+genome_fasta=vector.fasta # Name of the fasta file of the reference genome
+```
 1. Prepare Docker image:
 ```
 # Load the Docker image and check
@@ -62,9 +76,16 @@ cat $workdir/${sample}/GC107${sample}.210106_WLG_GR002.210219.NovaSeq1.FCB.lane1
 rm $workdir/${sample}/GC107${sample}.210106_WLG_GR002.210219.NovaSeq1.FCB.lane1.gcap_dev.*
 rm $workdir/${sample}/GC107${sample}.210106_WLG_GR002.210219.NovaSeq1.FCB.lane2.gcap_dev.*
 ```
-
-
-## Molecule-first
-
-
+4. Run Tell-Read script on FASTQ sequencing data files
+```
+$workdir/tellread-release/run_tellread_fq.sh \
+-i1 $workdir/${sample}/GC107${sample}.210106_WLG_GR002.210219.NovaSeq1.FCB.lane12.gcap_dev.I1.fastq.gz \
+-i2 $workdir/${sample}/GC107${sample}.210106_WLG_GR002.210219.NovaSeq1.FCB.lane12.gcap_dev.I2.fastq.gz \
+-r1 $workdir/${sample}/GC107${sample}.210106_WLG_GR002.210219.NovaSeq1.FCB.lane12.gcap_dev.R1.fastq.gz \
+-r2 $workdir/${sample}/GC107${sample}.210106_WLG_GR002.210219.NovaSeq1.FCB.lane12.gcap_dev.R2.fastq.gz \
+-o $workdir/${sample}/${output_dir} \
+-f $workdir/${genome_dir}/ \
+-s ${sample} \
+-g ${genome_fasta}
+```
 
