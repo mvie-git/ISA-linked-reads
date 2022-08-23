@@ -7,12 +7,7 @@ There is three steps:
 3. Identify chimeric molecules meaning with reads mapped to both genomes
 
 
-# Table of Contents
-1. [Generate TELL-Seq linked-reads from sequencing data](#TELL-Seq linked-reads)
-2. [Example2](#example2)
-3. [Third Example](#third-example)
-4. [Fourth Example](#fourth-examplehttpwwwfourthexamplecom)
-
+# Test 1
 
 ## Generate TELL-Seq linked-reads from sequencing data
 
