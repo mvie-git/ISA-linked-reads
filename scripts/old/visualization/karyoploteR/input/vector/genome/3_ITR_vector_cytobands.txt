@@ -1,0 +1,2 @@
+chr	start	end	name	gieStain
+1	1	130	ITR	3_ITR

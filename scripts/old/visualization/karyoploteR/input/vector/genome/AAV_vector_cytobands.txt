@@ -1,0 +1,7 @@
+chr	start	end	name	gieStain
+1	1	130	ITR	5_ITR
+1	184	2883	promoter	hGPE
+1	2958	3398	intron	HBB2
+1	3412	4485	gene	hG6PCwt
+1	4513	4675	polyA	HBB2
+1	4729	4856	ITR	3_ITR
