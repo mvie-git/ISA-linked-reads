@@ -1,15 +1,11 @@
-# ISA: Molecule-first strategy
-
-This strategy consists in gathering all reads sharing the same barcode into molecules then identify chimeric molecules.
+Molecule-first strategy consists in gathering all reads sharing the same barcode into molecules then identify chimeric molecules.
 There is three steps:
 1. Gather all reads sharing the same barcode to reconstruct the initial DNA molecule
 2. Map all the molecules against the hybrid genome
 3. Identify chimeric molecules meaning with reads mapped to both genomes
 
 
-# Test 1
-
-## Generate TELL-Seq linked-reads from sequencing data
+# Generate TELL-Seq linked-reads from sequencing data
 
 > The Tell-Read module of the [TELL-Seq software](https://www.universalsequencing.com/) demultiplex and correct error barcoded reads from the initial raw sequencing data.
 
@@ -84,8 +80,8 @@ $workdir/tellread-release/run_tellread_fq.sh \
 -g ${genome_fasta}
 ```
 
-## Test 2
+# Test 2
 
 
 
-## Test 3
+# Test 3
