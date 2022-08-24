@@ -156,6 +156,14 @@ Some useful commands to get some statistics on chimeric molecules:
 # Average size of molecules
 awk '{sum+=$5} END { print "Average = ",sum/NR}'
 ```
+or some visualizations with **ggplot R package**...
+- Boxplot: length of chimeric molecules, number of molecules per barcode
+  - Preparation of the input BED file for ggplot R package (![prepare_data.sh](https://github.com/mvie-git/ISA-linked-reads/blob/main/scripts/MOLECULE-first/ggplot/r_ggplot_boxplot/prepare_data.sh))
+  - R script for boxplot function (![r_plot_boxplot.R](https://github.com/mvie-git/ISA-linked-reads/blob/main/scripts/MOLECULE-first/ggplot/r_ggplot_boxplot/r_plot_boxplot.R))
+- Histogram: number of reads per molecule
+  - Preparation of the input BED file for ggplot R package (![prepare_data.sh](https://github.com/mvie-git/ISA-linked-reads/blob/main/scripts/MOLECULE-first/ggplot/r_ggplot_histogram/prepare_data.sh))
+  - R script for histogram function (![r_plot_histo.R](https://github.com/mvie-git/ISA-linked-reads/blob/main/scripts/MOLECULE-first/ggplot/r_ggplot_histogram/r_plot_histo.R))
+
 
 ## Coverage
 
@@ -171,8 +179,23 @@ awk '{sum+=$5} END { print "Average = ",sum/NR}'
 
 
 ### Visualization with PlotCoverage
+> To see the profile of the coverage along the mouse genome: ![plotCoverage](https://deeptools.readthedocs.io/en/develop/content/tools/plotCoverage.html) tool.
 
-- 
+It is required to filter out unmapped reads, vector mapped reads and duplicates. The number of vector mapped reads is really low so it has a minor impact on a global overview of genome coverage from these data. But we need to filter out unmapped reads: some of them have coordinates because samtools will give them the same coordinated if their mate pair mapped somewhere on the reference genome.
 
+```
+samtools view -F 4 -b input.bam > mapped.bam
+samtools sort mapped.bam > sorted.bam
+```
+
+Then, run plotCoverage:
+```
+plotCoverage -b sorted_sample1.bam  sorted_sample2.bam \
+--plotFile plotCoverage.sample1ANDsample2_mapping_mouse.no_duplicates \
+--plotTitle "Coverage after hybrid mapping" \
+--ignoreDuplicates \
+--numberOfProcessors 8 \
+--labels sample1 sample2
+```
 
 
