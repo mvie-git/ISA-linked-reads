@@ -126,15 +126,21 @@ samtools flagstat mapping.sorted.bam
 ## First reads selection based on vector mapping results
 ![Second step: Vector selection mapping](https://github.com/mvie-git/ISA-linked-reads/blob/main/scripts/MOLECULE-first/images/2_vector_selection_.pdf "First reads selection based on vector (MOLECULE-FIRST)")
 
-1. (Optional) Clean the BAM mapping file to filter out unmapped reads, duplicates reads, multi-mapped reads and low quality mapped reads (![filter_input_BAM_file.sh](https://github.com/mvie-git/ISA-linked-reads/tree/main/scripts/MOLECULE-first/1.filter_input_BAM_file_AAV))
+1. Clean the BAM mapping file to filter out unmapped reads, duplicates reads, multi-mapped reads and low quality mapped reads (![filter_input_BAM_file.sh](https://github.com/mvie-git/ISA-linked-reads/tree/main/scripts/MOLECULE-first/1.filter_input_BAM_file_AAV))
 2. Extract read ID of vector mapped reads (![select_readID_vector_selection.sh](https://github.com/mvie-git/ISA-linked-reads/tree/main/scripts/MOLECULE-first/2.select_readID_vector_selection))
-3. 
+3. Subset the initial index file to retrieve barcodes of the list of read ID corresponding to vector selected mapped reads (![retrieve_barcodes_from_readID_vector.sh](https://github.com/mvie-git/ISA-linked-reads/tree/main/scripts/MOLECULE-first/3.retrieve_barcodes_from_readID))
+4. Retrieve all the reads IDs corresponding to the subsetting new index meaning retrieving all the reads sharing the same barcode as reads mapped to the vector sequence (![retrieve_all_readID_from_barcodes_vector.sh](https://github.com/mvie-git/ISA-linked-reads/tree/main/scripts/MOLECULE-first/4.retrieve_all_readID_from_barcodes))
+5. Subset the input BAM file to keep only reads matching the read ID in the new index (![subset_BAM_file_with_readID.sh](https://github.com/mvie-git/ISA-linked-reads/tree/main/scripts/MOLECULE-first/5.subset_BAM_file_with_readID))
 
 
-
-
+## Second reads selection based on mouse mapping results
 ![Third step: Mouse selection mapping](https://github.com/mvie-git/ISA-linked-reads/blob/main/scripts/MOLECULE-first/images/3_mouse_selection.pdf "Third reads selection based on mouse (MOLECULE-FIRST)")
 
+6. Clean the BAM mapping file to filter out unmapped reads (mouse mapped reads only), duplicates reads, multi-mapped reads and low quality mapped reads. Here, we want to keep only « chimeric » molecules meaning reads mapped either on vector or mouse but sharing the same barcode. We filtered out barcodes associated with vector mapped reads only (![filter_input_BAM_file_mouse.sh](https://github.com/mvie-git/ISA-linked-reads/tree/main/scripts/MOLECULE-first/6.filter_input_BAM_file_mouse))
+7. Extract read ID of mouse mapped reads (![select_readID_mouse_selection.sh](https://github.com/mvie-git/ISA-linked-reads/tree/main/scripts/MOLECULE-first/7.select_readID_of_interest))
+8. Subset the initial index file to retrieve barcodes of the list of read ID corresponding to mouse selected mapped reads (![retrieve_barcodes_from_readID_mouse.sh](https://github.com/mvie-git/ISA-linked-reads/tree/main/scripts/MOLECULE-first/8.retrieve_barcodes_from_readID))
+9. Retrieve all the reads IDs corresponding to the subsetting new index meaning retrieving all the reads sharing the same barcode as reads mapped to the mouse genome (![retrieve_all_readID_from_barcodes_mouse.sh](https://github.com/mvie-git/ISA-linked-reads/tree/main/scripts/MOLECULE-first/9.retrieve_all_readID_from_barcodes))
+10. 
 
 
 
