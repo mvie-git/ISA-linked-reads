@@ -80,6 +80,11 @@ $workdir/tellread-release/run_tellread_fq.sh \
 -g ${genome_fasta}
 ```
 
+To see the distribution of length reads:
+```
+zcat demultiplex_AAV_R1_T500.fastq.gz.corrected.fastq.err_barcode_removed.fastq.gz | awk 'NR%4 == 2 {lengths[length($0)]++} END {for (l in lengths) {print l, lengths[l]}}'
+```
+
 ## Prepare an index file of the TELL-seq linked reads
 > It is useful to have the list of all the reads (1. read ID) and their corresponding barcode (2. barcode sequence) in a text file for downstream analysis. The script is called ![prepare_index_file.sh](https://github.com/mvie-git/ISA-linked-reads/tree/main/scripts/prepare_index_file)
 
@@ -154,7 +159,10 @@ samtools flagstat mapping.sorted.bam
 Some useful commands to get some statistics on chimeric molecules:
 ```
 # Average size of molecules
-awk '{sum+=$5} END { print "Average = ",sum/NR}'
+awk '{sum+=$5} END { print "Average = ",sum/NR}' chimeric.bed
+
+# Number of chimeric molecules by chromosome
+awk '{print $1}' chimeric.bed | sort | uniq -c
 ```
 or some visualizations with **ggplot R package**...
 - Boxplot: length of chimeric molecules, number of molecules per barcode
@@ -198,4 +206,6 @@ plotCoverage -b sorted_sample1.bam  sorted_sample2.bam \
 --labels sample1 sample2
 ```
 
+### Some statistics with Covtobed
+> A tool to generate BED coverage tracks from BAM files (![covtobed.sh](https://github.com/mvie-git/ISA-linked-reads/blob/main/scripts/MOLECULE-first/coverage/covtobed/covtobed.sh))
 
