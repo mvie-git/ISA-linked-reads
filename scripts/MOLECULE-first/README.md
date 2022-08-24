@@ -154,7 +154,10 @@ samtools flagstat mapping.sorted.bam
 Some useful commands to get some statistics on chimeric molecules:
 ```
 # Average size of molecules
-awk '{sum+=$5} END { print "Average = ",sum/NR}'
+awk '{sum+=$5} END { print "Average = ",sum/NR}' chimeric.bed
+
+# Number of chimeric molecules by chromosome
+awk '{print $1}' chimeric.bed | sort | uniq -c
 ```
 or some visualizations with **ggplot R package**...
 - Boxplot: length of chimeric molecules, number of molecules per barcode
@@ -198,4 +201,6 @@ plotCoverage -b sorted_sample1.bam  sorted_sample2.bam \
 --labels sample1 sample2
 ```
 
+### Some statistics with Covtobed
+> A tool to generate BED coverage tracks from BAM files (![covtobed.sh](https://github.com/mvie-git/ISA-linked-reads/blob/main/scripts/MOLECULE-first/coverage/covtobed/covtobed.sh))
 
