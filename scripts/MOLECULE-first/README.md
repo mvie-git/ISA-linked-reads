@@ -147,8 +147,13 @@ samtools flagstat mapping.sorted.bam
 ![Fourth step: Reconstruct chimeric molecules](https://github.com/mvie-git/ISA-linked-reads/blob/main/scripts/MOLECULE-first/images/4_reconstruct_molecules.pdf "Reconstruct chimeric molecules (MOLECULE-FIRST)")
 
 11. Add the barcode information as a tag in the new output BAM file with a tool named pysam which allow to parse a BAM file ![add_barcode_to_BAM_file.sh](https://github.com/mvie-git/ISA-linked-reads/blob/main/scripts/MOLECULE-first/11.add_barcode_to_BAM_file/add_barcode_to_BAM_file.sh)
-> Info! For large BAM files (![add_barcode_to_large_BAM_file.sh](https://github.com/mvie-git/ISA-linked-reads/blob/main/scripts/MOLECULE-first/11.add_barcode_to_BAM_file/with_large_BAM_file/add_barcode_to_large_BAM_file.sh))
+  > Info! For large BAM files (![add_barcode_to_large_BAM_file.sh](https://github.com/mvie-git/ISA-linked-reads/blob/main/scripts/MOLECULE-first/11.add_barcode_to_BAM_file/with_large_BAM_file/add_barcode_to_large_BAM_file.sh))
 12. Sort and index the BAM file (![sort_and_index_BAM_file.sh](https://github.com/mvie-git/ISA-linked-reads/blob/main/scripts/MOLECULE-first/sort_and_index_BAM_file.sh))
-13. 
+13. Reconstruct molecules from a BAM file (![reconstruct_molecules.sh](https://github.com/mvie-git/ISA-linked-reads/blob/main/scripts/MOLECULE-first/13.reconstruct_molecules/reconstruct_molecules.sh)) with adaptation of an original script from 10X Genomics (![GetMoleculesInfo_10X_modified.py](https://github.com/mvie-git/ISA-linked-reads/blob/main/scripts/MOLECULE-first/13.reconstruct_molecules/bin/GetMoleculesInfo_10X_modified.py))
 
+Some useful commands to get some statistics on chimeric molecules:
+```
+# Average size of molecules
+awk '{sum+=$5} END { print "Average = ",sum/NR}'
+```
 
