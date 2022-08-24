@@ -157,3 +157,22 @@ Some useful commands to get some statistics on chimeric molecules:
 awk '{sum+=$5} END { print "Average = ",sum/NR}'
 ```
 
+## Coverage
+
+### Visualization with KaryoploteR package
+
+- Distribution of vector mapped reads across the whole vector genome
+  - Preparation of the BED input file for karyoplote R package (![prepare_BED_file.sh](https://github.com/mvie-git/ISA-linked-reads/blob/main/scripts/MOLECULE-first/coverage/karyoploteR/kpRectBAMcoverage/prepare_BED_file.sh))
+  - R script for kpRectBAMcoverage function (![kpRectBAMcoverage.R](https://github.com/mvie-git/ISA-linked-reads/blob/main/scripts/MOLECULE-first/coverage/karyoploteR/kpRectBAMcoverage/kpRectBAMcoverage.R))
+
+- Distribution of the mouse mapped reads across the mouse genome
+  - Preparation of the BED input file for karyoplote R function (![prepare_BED_file.sh](https://github.com/mvie-git/ISA-linked-reads/blob/main/scripts/MOLECULE-first/coverage/karyoploteR/kpPlotDensity/prepare_BED_file.sh))
+  - R script for kpPlotDensity function (![karyoploteR_density_mouse.R](https://github.com/mvie-git/ISA-linked-reads/blob/main/scripts/MOLECULE-first/coverage/karyoploteR/kpPlotDensity/karyoploteR_density_mouse.R))
+
+
+### Visualization with PlotCoverage
+
+- 
+
+
+
