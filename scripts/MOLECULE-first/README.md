@@ -209,3 +209,8 @@ plotCoverage -b sorted_sample1.bam  sorted_sample2.bam \
 ### Some statistics with Covtobed
 > A tool to generate BED coverage tracks from BAM files (![covtobed.sh](https://github.com/mvie-git/ISA-linked-reads/blob/main/scripts/MOLECULE-first/coverage/covtobed/covtobed.sh))
 
+
+## Annotation
+
+### Annotatr
+> The annotatr package provides an easy way to summarize and visualize the intersection of genomic sites/regions with genomic annotations. Here, the goal is to annotate genomic regions of chimeric molecules where there is potential integration sites (![r_annotatr.R](https://github.com/mvie-git/ISA-linked-reads/blob/main/scripts/MOLECULE-first/annotation/annotatr/r_annotatr.R))
