@@ -140,8 +140,15 @@ samtools flagstat mapping.sorted.bam
 7. Extract read ID of mouse mapped reads (![select_readID_mouse_selection.sh](https://github.com/mvie-git/ISA-linked-reads/tree/main/scripts/MOLECULE-first/7.select_readID_of_interest))
 8. Subset the initial index file to retrieve barcodes of the list of read ID corresponding to mouse selected mapped reads (![retrieve_barcodes_from_readID_mouse.sh](https://github.com/mvie-git/ISA-linked-reads/tree/main/scripts/MOLECULE-first/8.retrieve_barcodes_from_readID))
 9. Retrieve all the reads IDs corresponding to the subsetting new index meaning retrieving all the reads sharing the same barcode as reads mapped to the mouse genome (![retrieve_all_readID_from_barcodes_mouse.sh](https://github.com/mvie-git/ISA-linked-reads/tree/main/scripts/MOLECULE-first/9.retrieve_all_readID_from_barcodes))
-10. 
+10. Subset the input BAM file to keep only reads matching the read ID in the new index (![subset_BAM_file_with_readID.sh](https://github.com/mvie-git/ISA-linked-reads/tree/main/scripts/MOLECULE-first/10.subset_BAM_file_with_readID))
 
 
+## Reconstruct chimeric molecules
+![Fourth step: Reconstruct chimeric molecules](https://github.com/mvie-git/ISA-linked-reads/blob/main/scripts/MOLECULE-first/images/4_reconstruct_molecules.pdf "Reconstruct chimeric molecules (MOLECULE-FIRST)")
+
+11. Add the barcode information as a tag in the new output BAM file with a tool named pysam which allow to parse a BAM file ![add_barcode_to_BAM_file.sh](https://github.com/mvie-git/ISA-linked-reads/blob/main/scripts/MOLECULE-first/11.add_barcode_to_BAM_file/add_barcode_to_BAM_file.sh)
+> Info! For large BAM files (![add_barcode_to_large_BAM_file.sh](https://github.com/mvie-git/ISA-linked-reads/blob/main/scripts/MOLECULE-first/11.add_barcode_to_BAM_file/with_large_BAM_file/add_barcode_to_large_BAM_file.sh))
+12. Sort and index the BAM file (![sort_and_index_BAM_file.sh](https://github.com/mvie-git/ISA-linked-reads/blob/main/scripts/MOLECULE-first/sort_and_index_BAM_file.sh))
+13. 
 
 
