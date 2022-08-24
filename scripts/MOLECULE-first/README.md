@@ -80,11 +80,15 @@ $workdir/tellread-release/run_tellread_fq.sh \
 -g ${genome_fasta}
 ```
 
+## Prepare an index file of the TELL-seq linked reads
+> It is useful to have the list of all the reads (1. read ID) and their corresponding barcode (2. barcode sequence) in a text file for downstream analysis. The script is called ![prepare_index_file.sh](https://github.com/mvie-git/ISA-linked-reads/tree/main/scripts/prepare_index_file)
+
+
+
 ## BWA: Map TELL-seq linked reads against the hybrid genome
 > BWA is a software package for mapping low-divergent sequences against a large reference genome. BWA-MEM is better for longer sequences ranged from 70bp to 1Mbp.
 
 ![First step: Hybrid genome mapping](https://github.com/mvie-git/ISA-linked-reads/tree/main/scripts/MOLECULE-first/images/1_mapping_hybrid_genome.pdf "Hybrid genome mapping (MOLECULE-FIRST)")
-
 
 **BWA-mem** takes as input the demultiplexed and error barcoded corrected TELL-seq linked reads (FASTQ) for mapping those reads against the hybrid genome. The two FASTA reference genome files are required to create an index of both references together with `BWA index` tool.
 ```
@@ -114,6 +118,23 @@ To view the distribution of the mapping reads against the hybrid genome with **I
 samtools sort -@ ${nb_threads} mapping.bam > mapping.sorted.bam
 samtools index mapping.sorted.bam
 ```
+Other useful commands to have some statistics on the alignment file with `samtools flagstat` command:
+```
+samtools flagstat mapping.sorted.bam
+```
+
+## First reads selection based on vector mapping results
+![Second step: Vector selection mapping](https://github.com/mvie-git/ISA-linked-reads/blob/main/scripts/MOLECULE-first/images/2_vector_selection_.pdf "First reads selection based on vector (MOLECULE-FIRST)")
+
+1. (Optional) Clean the BAM mapping file to filter out unmapped reads, duplicates reads, multi-mapped reads and low quality mapped reads (![filter_input_BAM_file.sh](https://github.com/mvie-git/ISA-linked-reads/tree/main/scripts/MOLECULE-first/1.filter_input_BAM_file_AAV))
+2. Extract read ID of vector mapped reads (![select_readID_vector_selection.sh](https://github.com/mvie-git/ISA-linked-reads/tree/main/scripts/MOLECULE-first/2.select_readID_vector_selection))
+3. 
+
+
+
+
+![Third step: Mouse selection mapping](https://github.com/mvie-git/ISA-linked-reads/blob/main/scripts/MOLECULE-first/images/3_mouse_selection.pdf "Third reads selection based on mouse (MOLECULE-FIRST)")
+
 
 
 
