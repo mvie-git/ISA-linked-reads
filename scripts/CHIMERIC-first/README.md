@@ -85,7 +85,7 @@ zcat demultiplex_AAV_R1_T500.fastq.gz.corrected.fastq.err_barcode_removed.fastq.
 ```
 
 ## Integration site detection tools
-> Tools have been developed to identify exact positions of human and virus breakpoints of integration events. Then it can annotate the integration events with the corresponding affected human genes. Here we adapted these scripts to takes as input a mouse and vector genome.
+> Tools have been developed to identify exact positions of human and virus breakpoints of integration events. Then it can annotate the integration events with the corresponding affected human genes. In our case, the goal is to study the integration events after injection of a vector in a mouse to treat a disease. No amplification and/or hybridization of ITRs/viral sequences yielding short reads have been applied.
 
 After benchmarking existing tools, here is the list of selected tools:
 - ![Virus-clip](https://github.com/mvie-git/ISA-linked-reads/tree/main/scripts/CHIMERIC-first/integration_site_detection_tools/virus_clip)
