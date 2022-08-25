@@ -84,3 +84,17 @@ To see the distribution of length reads:
 zcat demultiplex_AAV_R1_T500.fastq.gz.corrected.fastq.err_barcode_removed.fastq.gz | awk 'NR%4 == 2 {lengths[length($0)]++} END {for (l in lengths) {print l, lengths[l]}}'
 ```
 
+## Integration site detection tools
+> Tools have been developed to identify exact positions of human and virus breakpoints of integration events. Then it can annotate the integration events with the corresponding affected human genes. Here we adapted these scripts to takes as input a mouse and vector genome.
+
+After benchmarking existing tools, here is the list of selected tools:
+- ![Virus-clip](https://github.com/mvie-git/ISA-linked-reads/tree/main/scripts/CHIMERIC-first/integration_site_detection_tools/virus_clip)
+- ![GENE-IS]()
+- 
+
+
+
+
+
+
+
